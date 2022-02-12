@@ -52,6 +52,26 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+var axios = require("axios").default;
+
+var options = {
+  method: 'GET',
+  url: 'https://movie-database-imdb-alternative.p.rapidapi.com/',
+  params: {s: 'Avengers Endgame', r: 'json', page: '1'},
+  headers: {
+    'x-rapidapi-host': 'movie-database-imdb-alternative.p.rapidapi.com',
+    'x-rapidapi-key': '3e0dd86e83mshfd00507d24fcab4p1fbfa8jsn1ec1f1c8d228'
+  }
+};
+
+axios.request(options).then(function (response) {
+	console.log(response.data);
+}).catch(function (error) {
+	console.error(error);
+});
+
+
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
