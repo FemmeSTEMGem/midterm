@@ -12,11 +12,7 @@ VARIABLES     *
 
 // APP CONFIG
 
-// const express = require("express");
-// const app = express();
-// const PORT = 8080; // default port 8080
-
-// // for to be able to use POST
+// for to be able to use POST
 // const bodyParser = require("body-parser");
 // const { text } = require("body-parser");
 // const { application } = require("express");
@@ -31,7 +27,7 @@ VARIABLES     *
 
 // app.set("view engine", "ejs");
 
-// // functions
+// functions
 // const {
 //   getUserByEmail,
 //   urlsForUser,
@@ -41,43 +37,42 @@ VARIABLES     *
 ///////////////// on top is the dependencies ///////////
 
 // check if it work by console.log()
+// const { Pool } = require('pg');
+
+// const pool = new Pool({
+//   user: 'vagrant',
+//   password: '123',
+//   host: 'localhost',
+//   database: 'midterm'
+// });
 
 console.log("Do I work? yes");
 
-var img = document.createElement("img");
-img.src = "matplotlib-grid-02.png";
-
-const movieDb = [
-  { id: 1,
-    image: '/public/film_image.jpg',
-    title: 'power',
-    genre: 'drama',
-    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta iure atque animi voluptatibus eaque voluptatem natus sunt quod illum vitae, harum exercitationem voluptas enim blanditiis?',
-    premiered: '2021-02-11'
-
-  },
-  { id: 2,
-    image: 'image placeholder 2',
-    title: 'Hollywood',
-    genre: 'comedy',
-    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta iure atque animi voluptatibus eaque voluptatem natus sunt quod illum vitae, harum exercitationem voluptas enim blanditiis?',
-    premiered: '2021-02-12'
-
-  },
-  { id: 3,
-    image: 'image placeholder 3',
-    title: 'independence day',
-    genre: 'drama',
-    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta iure atque animi voluptatibus eaque voluptatem natus sunt quod illum vitae, harum exercitationem voluptas enim blanditiis?',
-    premiered: '2020-02-23'
-  },
-  { id: 4,
-    image: 'image placeholder 4',
-    title: 'Bob le dangereux',
-    genre: 'music comedy',
-    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta iure atque animi voluptatibus eaque voluptatem natus sunt quod illum vitae, harum exercitationem voluptas enim blanditiis?',
-    premiered: '2012-02-04'
+const result = [
+  {
+  description: "2018 film",
+  name: "Jurassic World I: Fallen Kingdom",
+  image: {
+    url: "https://commons.wikimedia.org/wiki/File:Jurassic_World_Fallen_Kingdom_Japan_Premiere_Red_Carpet_Chris_Pratt_%26_Bryce_Dallas_Howard_(29233763308).jpg",
+    contentUrl: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTb0DdcG6fVdyaEpR2ircvRww0gUzeVG5GYZW-hV4CmlMW4GDWn"
   }
+  },
+  {
+    description: "2018 film",
+    name: "Jurassic World II: Fallen Kingdom",
+    image: {
+      url: "https://commons.wikimedia.org/wiki/File:Jurassic_World_Fallen_Kingdom_Japan_Premiere_Red_Carpet_Chris_Pratt_%26_Bryce_Dallas_Howard_(29233763308).jpg",
+      contentUrl: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTb0DdcG6fVdyaEpR2ircvRww0gUzeVG5GYZW-hV4CmlMW4GDWn"
+    }
+  },
+  {
+      description: "2018 film",
+      name: "Jurassic World III: Fallen Kingdom",
+      image: {
+        url: "https://commons.wikimedia.org/wiki/File:Jurassic_World_Fallen_Kingdom_Japan_Premiere_Red_Carpet_Chris_Pratt_%26_Bryce_Dallas_Howard_(29233763308).jpg",
+        contentUrl: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTb0DdcG6fVdyaEpR2ircvRww0gUzeVG5GYZW-hV4CmlMW4GDWn"
+      }
+    }
 ];
 
 // steps in building the app
@@ -92,71 +87,92 @@ const movieDb = [
 ////////////////////////////////
 // for test we need the mock data to avoid to paid the api request.
 
-// render lists function
-// const renderLists = function(movieDb) {
-//   movieDb.forEach(element => {
-//     // createListElement(element);
-//     const $list = createListElement(element);
-//     $('#lists-container').prepend($list); // to add it to the page so we can make sure
-//   });
-
-// };
-
 // check! can we get data by ajax?
 
-const appendCategories = function(movie) {
-  // const defaultImg = 'https://www.pexels.com/photo/gray-mercedez-benz-amg-112460';
-  console.log(movie.title);
-  const $singleListElement = $(` <div class="categorie">
-  <div class="categorie">
-    <img
-    class="categorie-img"
-    src="${movie.image}" alt="film image" width="250" height="250"/>
-    <div class="movie--info">
-      <h1>${movie.title}</h1>
-      <h2>${movie.genres}</h2>
-      <h3>${movie.premiered}</h3>
-      <div class="list-content">
-      ${$("<p>")
-.text(movie.description)
-.html()}
-    </div>
+const appendCategories = function(category) {
+  const $singleListElement = $(`
+  <div class="task">
+    <div class="content">
+      <p class="task-text">${category.name}</p>
     </div>
   </div>
-</div>`)
-
-    // console.log(singleListElement);
+  <div class="actions">
+    <button class="edit">Edit</button>
+    <button class="delete">Delete</button>
+  </div>
+  `);
     return $singleListElement;
 }
 
-const appendMultipleCategories = function(movieDb) {
-  for (let movie of movieDb) {
-    const $list = appendCategories(movie);
-    $('#lists-container').prepend($list); // to add it to the page so we can make sure
+//   <div class="categorie">
+//   <div class="categorie">
+//     <img
+//     class="categorie-img"
+//     src="${movie.image}" alt="film image" width="250" height="250"/>
+//     <div class="movie--info">
+//       <h1>${movie.title}</h1>
+//       <h2>${movie.genres}</h2>
+//       <h3>${movie.premiered}</h3>
+//       <div class="list-content">
+//       ${$("<p>")
+// .text(movie.description)
+// .html()}
+//     </div>
+//     </div>
+//   </div>
+// </div>`)
+
+const appendMultipleCategories = function(result) {
+  for (let element of result) {
+    const $list = appendCategories(element);
+    $('#tasks').prepend($list); // to add it to the page so we can make sure
+    // createFieldTable(element);
   }
 }
 
-// write data in db
+// create a row in db
+const createFieldTable = function(element) {
+  for (let cat in element) {
+    console.log(`cat: ${element[cat]}`);
+    let user_id = 4;
+    Pool.query(`
+      INSERT INTO widgets (entry_text, category, user_id)
+      values ($1, $2, $3), [${cat.name}, ${cat.category}, ${user_id}]`
+    )
+    }
+};
 
-// const addCategoriesDb = function(data) {
-//   for (let cat of categories) {
-//     Pool.query(`
-//     INSERT INTO
-//     FROM data $1
-//     WHERE `
 
-//     )
-//   }
-// }
+// $(() => {
+//   console.log('Document ready to go!');
+//   appendMultipleCategories(result);
+
+// })
+
+/* only execute this script when the document is ready */
+$(document).ready(function(){
+  /* function called when you click of the button */
+  const array = ['#movies', '#restaurants', '#books', '#products' ];
+  array.forEach(element => {
+    $(element).click(function(){
+      console.log(`Button: is on`);
+      /* this function toggle the visibility of our "li" elements */
+      $("li").toggle("slow");
+
+      appendMultipleCategories(result);
+    });
+  });
+});
 
 
 // // document on ready function
-$(() => {
+// $(() => {
   // in case of we need to add the categorie in the url we do like this
   // const searchURL = apiURL + item;
   // then the $.get below should be on searchURL instant of apiURL
 // to get data out using /fetch/jquery ajax
-  appendMultipleCategories(movieDb);
+// GET https://kgsearch.googleapis.com/v1/entities:search
+  // appendMultipleCategories(result);
 
   // $.get(apiURL).then((data) => {
   //   console.log(data);
@@ -164,10 +180,12 @@ $(() => {
   //   // addDb(data);
   // });
 
-  // $(#categories).on(`submit`, (evt) => {
+
+
+  // $('btn1 btn-primary').on(`submit`, (evt) => {
   //   evt.preventDefault();
   //   console.log('HELLO WORLD!');
-  //   $(#categories).empty();
+  //   $('btn1 btn-primary').empty();
   //   // get the text from the input field
   //   // append it to the my API URL
   //   // get the new data
@@ -190,7 +208,7 @@ $(() => {
   //     return;
   //   }
   //   const templateVars = { user: users[req.session.userID] };
-  //   res.render("show", templateVars);
+  //   res.render("/login", templateVars);
   // });
 
 
@@ -200,7 +218,7 @@ $(() => {
 
   // $()
 
-});
+// });
 
 
 // we save data we get in our db
@@ -256,3 +274,16 @@ $(() => {
 //   res.clearCookie("session.sig");
 //   res.redirect("/urls");
 // });
+
+
+///
+//  from shannon
+
+//  about our backend code:
+// POST request
+// Check if user is logged in - if not, error message
+// If user is logged in, push their query into the APIUrl (we'll need a function to replace any spaces with "+"
+// Then use the APIUrl to make an API request
+// Pull the information we need from the JSON object we receive
+// Compare that information against a set of keywords we give it to determine which category it should go into
+// Do INSERT INTO to push the information into our database (using $1, $2, etc. to keep our database safe)
