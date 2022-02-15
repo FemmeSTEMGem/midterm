@@ -2,19 +2,170 @@
 <html lang="en">
 
 <head>
-  <title>Home Page</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List</title>
 
-  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/main.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+  <link rel="stylesheet" href="/styles/main.css" />
 
-  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+
+<style>
+body {
+  display: flex;
+	flex-direction: column;
+	/* flex-wrap: nowrap; */
+	justify-content: last baseline;
+}
+	/* align-items: stretch; */
+	/* align-content: stretch; */
+li {
+  list-style-type: none;
+  margin: 0 2vw;
+  /* our font-size will be 3% of the height of the viewport */
+  font-size: 3vh;
+}
+a:hover{
+  background-color: #C6E9FF;
+}
+
+ul{
+  margin: 0;
+  padding: 0;
+
+  /*this option by default dispose the elements in a row (flex-direction: row)*/
+  display: flex;
+}
+/*change the layout of the navigation bar for all the screens
+that have a width less or equal than 500px*/
+
+@media only screen and (max-width: 500px) {
+  /*shows elements in a column*/
+  ul{
+    flex-direction: column;
+  }
+
+  /* deletes margin on top or bottom of the a tag*/
+  li{
+    margin: 0;
+  }
+ /* makes sure that the a tag will take the entire screen*/
+  a{
+    display: block;
+  }
+}
+button{
+    display: block;
+    ...
+    cursor: pointer;
+
+    /*this put the button on the left*/
+    align-self: flex-start;
+  }
+button{
+  display: none;
+}
+button{
+    /*makes the button visible*/
+    display: block;
+
+    /*since we are here, we can style it a little bit!*/
+    padding: 2vw;
+    font-size: 3vh;
+    background-color: #AFE0FF;
+    border: none;
+
+    /*outline none removes the default blue border that appears anytime you click on the button*/
+    outline: none;
+
+    cursor: pointer;
+  }
+</style>
+
+
   <script type="text/javascript" src="/scripts/app.js"></script>
+
+</head>
+
+<body style="background-color: bisque;">
+
+  <header>
+    <h1>To-Do List</h1>
+
+      <nav class="task-list-nav">
+        <ul>
+
+     <!-- button here -->
+     <button id="movies">Film series to watch</button>
+     <!-- <br> -->
+     <button id="restaurants">Restaurants, cafes, etc. (To eat)</button>
+     <button id="books">Books (To read)</button>
+     <button id="products">Products (To buy)</button>
+
+        </ul>
+
+      </nav>
+
+
+  </header>
+  <br>
+<div>
+  <main>
+    <section class="task-list">
+      <h2>Task: <%=   %></h2>
+
+      <br>
+
+      <div id="tasks">
+
+        <div class="task">
+          <div class="content">
+            <input type="text" class="text" value="A new task" readonly>
+          </div>
+          <div class="actions">
+            <button class="edit">Edit</button>
+            <button class="delete">Delete</button>
+  <link rel="stylesheet" href="/styles/main.css" />
 </head>
 
 <body>
-  <h1>Have fun! 🥔</h1>
+  <div class="content">
+    <div class="topnav">
+      <a class="active" href="categories">Categories</a>
+      <a href="logout">Logout</a>
+      <a href="edit-profile">Edit Profile</a>
+    </div>
+    <header>
+      <h1>To-Do List</h1>
+      <form id="new-task-form">
+        <input type="text" name="new-task-input" id="new-task-input" placeholder="What do you have planned?" />
+        <input type="submit" id="new-task-submit" value="Add task" />
+      </form>
+    </header>
+    <main>
+      <section class="task-list">
+        <h2>Tasks</h2>
+
+        <div id="tasks">
+
+          <div class="task">
+            <div class="content">
+              <input type="text" class="text" value="A new task" readonly>
+            </div>
+            <div class="actions">
+              <button class="edit">Edit</button>
+              <button class="delete">Delete</button>
+            </div>
+          </div>
+
+        </div>
+  </div>
+  </section>
+  </main>
+</div>
+
+  <!-- <script src="fill out later"></script> -->
 </body>
 
 </html>

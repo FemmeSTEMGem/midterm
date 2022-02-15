@@ -52,6 +52,18 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+
+app.get("/login", (req, res) => {
+  if (req.session.userID) {
+    res.redirect("/");
+    return;
+  }
+  const templateVars = { user: users[req.session.userID] };
+  res.render("/login", templateVars);
+});
+
+
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
