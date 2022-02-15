@@ -53,14 +53,14 @@ app.get("/", (req, res) => {
 });
 
 
-  app.get("/login", (req, res) => {
-    if (req.session.userID) {
-      res.redirect("/");
-      return;
-    }
-    const templateVars = { user: users[req.session.userID] };
-    res.render("/login", templateVars);
-  });
+app.get("/login", (req, res) => {
+  if (req.session.userID) {
+    res.redirect("/");
+    return;
+  }
+  const templateVars = { user: users[req.session.userID] };
+  res.render("/login", templateVars);
+});
 
 
 
