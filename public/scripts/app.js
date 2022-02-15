@@ -36,15 +36,7 @@ VARIABLES     *
 
 ///////////////// on top is the dependencies ///////////
 
-// check if it work by console.log()
-// const { Pool } = require('pg');
 
-// const pool = new Pool({
-//   user: 'vagrant',
-//   password: '123',
-//   host: 'localhost',
-//   database: 'midterm'
-// });
 
 console.log("Do I work? yes");
 
@@ -74,15 +66,41 @@ const result = [
       }
     }
 ];
+const apiURL1 = 'https://api.tvmaze.com/search/shows?q=cars';
+const apiURL2 = 'https://api.tvmaze.com/search/shows?q=cars';
+const apiURL3 = 'https://api.tvmaze.com/search/shows?q=cars';
+const apiURL4 = 'https://api.tvmaze.com/search/shows?q=cars';
+
+ // login page - GET
+ // redirects to urls index page if already logged in
+
+ $.get(apiURL1)
+ .then((data) => {
+   console.log('this is work 202020');
+   console.log(data[0].show.image.medium);
+ })
+ .catch(err => {
+       console.log(err.message);
+     });
+
+  // app.get("/login", (req, res) => {
+  //   if (req.session.userID) {
+  //     res.redirect("/");
+  //     return;
+  //   }
+  //   const templateVars = { user: users[req.session.userID] };
+  //   res.render("/login", templateVars);
+  // });
+
 
 // steps in building the app
 // get my api URL
 //////////////////////////////////
 // const apiURL = 'https://api.tvmaze.com/search/shows?q=cars';
-// // to get data out using /fetch/jquery ajax
-// $.get(apiURL).then((data) => {
+// to get data out using /fetch/jquery ajax
+// $.get(apiURL1).then((data) => {
 //   console.log('this is work 202020');
-//   console.log(data);
+//   console.log(data.show);
 // });
 ////////////////////////////////
 // for test we need the mock data to avoid to paid the api request.
@@ -131,16 +149,16 @@ const appendMultipleCategories = function(result) {
 }
 
 // create a row in db
-const createFieldTable = function(element) {
-  for (let cat in element) {
-    console.log(`cat: ${element[cat]}`);
-    let user_id = 4;
-    Pool.query(`
-      INSERT INTO widgets (entry_text, category, user_id)
-      values ($1, $2, $3), [${cat.name}, ${cat.category}, ${user_id}]`
-    )
-    }
-};
+// const createFieldTable = function(element) {
+//   for (let cat in element) {
+//     console.log(`cat: ${element[cat]}`);
+//     let user_id = 4;
+//     Pool.query(`
+//       INSERT INTO widgets (entry_text, category, user_id)
+//       values ($1, $2, $3), [${cat.name}, ${cat.category}, ${user_id}]`
+//     )
+//     }
+// };
 
 
 // $(() => {
@@ -151,14 +169,14 @@ const createFieldTable = function(element) {
 
 /* only execute this script when the document is ready */
 $(document).ready(function(){
+
   /* function called when you click of the button */
   const array = ['#movies', '#restaurants', '#books', '#products' ];
   array.forEach(element => {
     $(element).click(function(){
-      console.log(`Button: is on`);
+      console.log(`Button is on: ${element}`);
       /* this function toggle the visibility of our "li" elements */
       $("li").toggle("slow");
-
       appendMultipleCategories(result);
     });
   });
@@ -215,8 +233,6 @@ $(document).ready(function(){
   // $(#logout).on(`submit`, (evt) => {
   //   console.log('logout page');
   // })
-
-  // $()
 
 // });
 
@@ -287,3 +303,24 @@ $(document).ready(function(){
 // Pull the information we need from the JSON object we receive
 // Compare that information against a set of keywords we give it to determine which category it should go into
 // Do INSERT INTO to push the information into our database (using $1, $2, etc. to keep our database safe)
+
+// for call all promise for fetch data from api
+
+// const promise1 = app.get(url) for film
+// const promise2 = app.get(url) for restaurants
+// const promise3 = app.get(url) for books
+// const promise4 = app.get(url) for products
+
+// promise.all([promise1, promise2, promise3, promise4])
+//    .then(all => {
+//     console.log(`all 1; ${all[0].data}`);
+//     console.log(`all 2; ${all[0].data}`);
+//     console.log(`all 3; ${all[0].data}`);
+//     console.log(`all 4; ${all[0].data}`);
+// })
+//   .catch(err => {
+//     console.log(err.message);
+//   })
+//   .finally(rs => {
+//     pool.end();
+//   });
