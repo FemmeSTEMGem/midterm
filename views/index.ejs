@@ -15,28 +15,30 @@
 
 </head>
 
-<body style="background-color: bisque;">
-
-  <header>
+<body>
+  <div class="topnav">
     <h1>To-Do List</h1>
-    <div class="topnav">
-      <a class="active" href="categories">Categories</a>
+    <div class="navbuttons">
+      <a class="active" <a href="edit-profile">Edit Profile</a>
       <a href="logout">Logout</a>
-      <a href="edit-profile">Edit Profile</a>
     </div>
-    <nav class="task-list-nav">
-      <ul>
+  </div>
+  <nav class="task-list-nav">
+    <ul>
 
-        <!-- button here -->
-        <button id="movies">Film series to watch</button>
-        <!-- <br> -->
-        <button id="restaurants">Restaurants, cafes, etc. (To eat)</button>
-        <button id="books">Books (To read)</button>
-        <button id="products">Products (To buy)</button>
+      <!-- button here -->
+      <button id="movies">Film series to watch</button>
+      <!-- <br> -->
+      <button id="restaurants">Restaurants, cafes, etc. (To eat)</button>
+      <button id="books">Books (To read)</button>
+      <button id="products">Products (To buy)</button>
 
-      </ul>
-
-    </nav>
+    </ul>
+    <!-- New test code added for task button -->
+    <div class="content">
+      <input type="text" class="text" value="A new task" readonly>
+    </div>
+  </nav>
 
 
   </header>
