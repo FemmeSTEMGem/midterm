@@ -1,42 +1,11 @@
 // Client facing scripts here
 
-// Express server is th logic program. The one who communicate with all files in he application.
-
-/*
-***************
-SETUP         *
-FUNCTIONS     *
-VARIABLES     *
-***************
-*/
-
-// APP CONFIG
-
-// for to be able to use POST
-// const bodyParser = require("body-parser");
-// const { text } = require("body-parser");
-// const { application } = require("express");
-// app.use(bodyParser.urlencoded({ extended: true }));
-
-// const cookieSession = require("cookie-session");
-// app.use(cookieSession({ name: "session", secret: "grey-rose-juggling-volcanoes" }));
-
-// const bcrypt = require("bcryptjs");
-// const password = "purple-monkey-dinosaur"; // found in the req.params object
-// const hashedPassword = bcrypt.hashSync(password, 10);
-
-// app.set("view engine", "ejs");
-
 // functions
 const {
   getUserByEmail,
   appendCategories,
   generateRandomString, appendMultipleCategories, createFieldTable
 } = require("./helpers");
-
-///////////////// on top is the dependencies ///////////
-
-
 
 console.log("Do I work? yes");
 
@@ -107,37 +76,6 @@ const apiURL4 = 'https://api.tvmaze.com/search/shows?q=cars';
 
 // check! can we get data by ajax?
 
-
-
-//   <div class="categorie">
-//   <div class="categorie">
-//     <img
-//     class="categorie-img"
-//     src="${movie.image}" alt="film image" width="250" height="250"/>
-//     <div class="movie--info">
-//       <h1>${movie.title}</h1>
-//       <h2>${movie.genres}</h2>
-//       <h3>${movie.premiered}</h3>
-//       <div class="list-content">
-//       ${$("<p>")
-// .text(movie.description)
-// .html()}
-//     </div>
-//     </div>
-//   </div>
-// </div>`)
-
-
-
-
-
-
-// $(() => {
-//   console.log('Document ready to go!');
-//   appendMultipleCategories(result);
-
-// })
-
 /* only execute this script when the document is ready */
 $(document).ready(function(){
 
@@ -150,8 +88,15 @@ $(document).ready(function(){
       $("li").toggle("slow");
       appendMultipleCategories(result);
     });
+    $(#newUser).click(() => {
+      console.log('New user click! What I have to do?')
+    })
+    $(#newCategory).click(() => {
+      console.log('Ho! I need a new category PLZ');
+    })
   });
 });
+
 
 
 // // document on ready function
@@ -164,10 +109,7 @@ $(document).ready(function(){
   // appendMultipleCategories(result);
 
   // $.get(apiURL).then((data) => {
-  //   console.log(data);
-  //   appendMultipleCategories(data);
-  //   // addDb(data);
-  // });
+
 
 
 
