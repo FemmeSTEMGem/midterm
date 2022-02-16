@@ -55,42 +55,44 @@ app.use("/api/list_items", listItemsRoutes(db));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
+const getAllUsers = (callback) => {
+  db.query('SELECT * FROM users')
+  .then((results) => {
+    callback(results.rows)
+  // .catch((err) => console.log(err.message))
+  })
+}
+
 app.get("/", (req, res) => {
-  res.render("index");
+  getAllUsers((users) => {
+    const templateVars = {users}
+    res.render("index", templateVars);
+  })
+
 });
+
+// Users: <%=users[0].name %> - this is for the .ejs file
+
+
+
 
 
 app.get("/login", (req, res) => {
   res.render("login")
 });
 
+//LOGIN USER
 app.post("/login", (req, res) => {
-  console.log("req.body: ", req.body)
-  console.log("req.session: ", req.session)
-  res.render("index")
+  req.session.user_id = 1
+  return res.redirect("/")
 })
 
+//LOGOUT USER
+app.post("/logout", (req, res) => {
+  req.session = null;
 
-// //LOGIN USER
-// app.post("/login", (req, res) => {
-//   const email = req.body.email;
-//   const password = req.body.password;
-//   const user = findUserByEmail(email, users);
-
-
-//   if (email === "" || password === "") {
-//     return res.send('<html><body>404 Error. Email and/or Password was blank.</b></body></html>\n');
-//   }
-
-//   if (!user || !bcrypt.compareSync(password, user.password)) {
-//     return res.send('<html><body>403 error</b></body></html>\n');
-//   }
-
-//   req.session.user_id = user.id;
-
-//   return res.redirect('/urls');
-
-// });
+  return res.redirect("/");
+});
 
 
 
