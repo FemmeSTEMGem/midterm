@@ -143,10 +143,6 @@ $(document).ready(function(){
   // });
 
 
-  // $(#logout).on(`submit`, (evt) => {
-  //   console.log('logout page');
-  // })
-
 // });
 
 
@@ -204,20 +200,6 @@ $(document).ready(function(){
 //   res.redirect("/urls");
 // });
 
-
-///
-//  from shannon
-
-//  about our backend code:
-// POST request
-// Check if user is logged in - if not, error message
-// If user is logged in, push their query into the APIUrl (we'll need a function to replace any spaces with "+"
-// Then use the APIUrl to make an API request
-// Pull the information we need from the JSON object we receive
-// Compare that information against a set of keywords we give it to determine which category it should go into
-// Do INSERT INTO to push the information into our database (using $1, $2, etc. to keep our database safe)
-
-// for call all promise for fetch data from api
 
 // const promise1 = app.get(url) for film
 // const promise2 = app.get(url) for restaurants
