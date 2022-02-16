@@ -1,9 +1,10 @@
 
 body {
-  display: flex;
-  flex-direction: column;
-  /* flex-wrap: nowrap; */
-  justify-content: last baseline;
+  // display: flex;
+  // // flex-direction: column;
+  // flex-wrap: nowrap;
+  // justify-content: last baseline;
+  width: 100%;
 }
 
 /* align-items: stretch; */
@@ -75,4 +76,6 @@ button {
 
   cursor: pointer;
 }
+
+
 
