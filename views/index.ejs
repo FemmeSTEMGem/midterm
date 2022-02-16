@@ -10,33 +10,36 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
   <link rel="stylesheet" href="/styles/main.css" />
   <link rel="stylesheet" href="/styles/nav.css" />
+  <!-- <link rel="stylesheet" href="styles/partials/profile.css" /> -->
 
   <script type="text/javascript" src="/scripts/app.js"></script>
 
 </head>
 
-<body style="background-color: bisque;">
-
-  <header>
+<body>
+  <div class="topnav">
     <h1>To-Do List</h1>
-    <div class="topnav">
-      <a class="active" href="categories">Categories</a>
+    <div class="navbuttons">
+      <a id="profile" class="active" <a href="edit-profile">Edit Profile</a>
       <a href="logout">Logout</a>
-      <a href="edit-profile">Edit Profile</a>
     </div>
-    <nav class="task-list-nav">
-      <ul>
+  </div>
+  <nav class="task-list-nav">
+    <ul>
 
-        <!-- button here -->
-        <button id="movies">Film series to watch</button>
-        <!-- <br> -->
-        <button id="restaurants">Restaurants, cafes, etc. (To eat)</button>
-        <button id="books">Books (To read)</button>
-        <button id="products">Products (To buy)</button>
+      <!-- button here -->
+      <button id="movies">Film series to watch</button>
+      <!-- <br> -->
+      <button id="restaurants">Restaurants, cafes, etc. (To eat)</button>
+      <button id="books">Books (To read)</button>
+      <button id="products">Products (To buy)</button>
 
-      </ul>
-
-    </nav>
+    </ul>
+    <!-- New test code added for task button -->
+    <div class="content">
+      <input type="text" class="text" value="A new task" readonly>
+    </div>
+  </nav>
 
 
   </header>
@@ -52,45 +55,10 @@
         <div id="tasks">
 
           <div class="task">
-            <!-- <div class="content">
-              <input type="text" class="text" value="A new task" readonly>
-            </div>
-            <div class="actions">
-              <button class="edit">Edit</button>
-              <button class="delete">Delete</button> -->
+
             <link rel="stylesheet" href="/styles/main.css" />
             </head>
 
-            <!-- <body>
-                <div class="content">
-                  <div class="topnav">
-                    <a class="active" href="categories">Categories</a>
-                    <a href="logout">Logout</a>
-                    <a href="edit-profile">Edit Profile</a>
-                  </div>
-                  <header>
-                    <h1>To-Do List</h1>
-                    <form id="new-task-form">
-                      <input type="text" name="new-task-input" id="new-task-input"
-                        placeholder="What do you have planned?" />
-                      <input type="submit" id="new-task-submit" value="Add task" />
-                    </form>
-                  </header>
-                  <main>
-                    <section class="task-list">
-                      <h2>Tasks</h2>
-
-                      <div id="tasks">
-
-                        <div class="task">
-                          <div class="content">
-                            <input type="text" class="text" value="A new task" readonly>
-                          </div>
-                          <div class="actions">
-                            <button class="edit">Edit</button>
-                            <button class="delete">Delete</button>
-                          </div>
-                        </div> -->
 
           </div>
         </div>

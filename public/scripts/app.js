@@ -38,7 +38,6 @@ const createFieldTable = function(element) {
 };
 
 
-
 console.log("Do I work? yes");
 
 const result = [
@@ -121,6 +120,13 @@ $(document).ready(function(){
     });
 
   });
+
+  $('#profile').click(function(){
+    console.log('profile page here');
+
+
+  });
+
 });
 
 

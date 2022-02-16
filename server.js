@@ -52,7 +52,9 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-
+// form action as to be = /login method = POST
+// all info from the form will be in req.body
+// ***
 app.get("/login", (req, res) => {
   if (req.session.userID) {
     res.redirect("/");
@@ -61,8 +63,29 @@ app.get("/login", (req, res) => {
   const templateVars = { user: users[req.session.userID] };
   res.render("/login", templateVars);
 });
+// edit profile is good plz dont touch
+app.get("/edit-profile", (req, res) => {
+  let templateVars = {user_id: '123'};
+  // promise
+  const query = `SELECT * FROM users WHERE users.id = 1`;
+  // const query = `SELECT * FROM users WHERE users.id = $1`;
+  console.log(`userId: ${req.session}`);
+db
+.query(query)
+// .query(query, [req.session.userID] )
+.then(data => {
+  templateVars = data.rows[0];
+  res.render('profile', templateVars);
+})
+.catch(e => console.error(e.stack))
 
+})
+// this post must be implement with what we need to do after profile update
 
+app.post("/profile", (req, res) => {
+  console.log('profile changed');
+  console.log(body);
+})
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
