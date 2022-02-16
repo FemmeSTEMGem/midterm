@@ -1,11 +1,43 @@
 // Client facing scripts here
 
 // functions
-const {
-  getUserByEmail,
-  appendCategories,
-  generateRandomString, appendMultipleCategories, createFieldTable
-} = require("./helpers");
+
+const appendCategories = function(category) {
+  const $singleListElement = $(`
+  <div class="task">
+    <div class="content">
+      <p class="task-text">${category.name}</p>
+    </div>
+  </div>
+  <div class="actions">
+    <button class="edit">Edit</button>
+    <button class="delete">Delete</button>
+  </div>
+  `);
+    return $singleListElement;
+}
+
+const appendMultipleCategories = function(result) {
+  for (let element of result) {
+    const $list = appendCategories(element);
+    $('#tasks').prepend($list); // to add it to the page so we can make sure
+    // createFieldTable(element);
+  }
+}
+
+// create a row in db
+const createFieldTable = function(element) {
+  for (let cat in element) {
+    console.log(`cat: ${element[cat]}`);
+    let user_id = 4;
+    Pool.query(`
+      INSERT INTO widgets (entry_text, category, user_id)
+      values ($1, $2, $3), [${cat.name}, ${cat.category}, ${user_id}]`
+    )
+    }
+};
+
+
 
 console.log("Do I work? yes");
 
@@ -43,14 +75,14 @@ const apiURL4 = 'https://api.tvmaze.com/search/shows?q=cars';
  // login page - GET
  // redirects to urls index page if already logged in
 
- $.get(apiURL1)
- .then((data) => {
-   console.log('this is work 202020');
-   console.log(data[0].show.image.medium);
- })
- .catch(err => {
-       console.log(err.message);
-     });
+//  $.get(apiURL1)
+//  .then((data) => {
+//    console.log('this is work 202020');
+//    console.log(data[0].show.image.medium);
+//  })
+//  .catch(err => {
+//        console.log(err.message);
+//      });
 
   // app.get("/login", (req, res) => {
   //   if (req.session.userID) {
@@ -79,27 +111,15 @@ const apiURL4 = 'https://api.tvmaze.com/search/shows?q=cars';
 /* only execute this script when the document is ready */
 $(document).ready(function(){
 
-    /// we can use jquery for login with th event listener
-  $(#login).on(`submit`, (evt) => {
-    console.log('login work');
-  })
-
   /* function called when you click of the button */
   const array = ['#movies', '#restaurants', '#books', '#products' ];
   array.forEach(element => {
     $(element).click(function(){
-      console.log(`Button is on: ${element}`);
       /* this function toggle the visibility of our "li" elements */
       $("li").toggle("slow");
       appendMultipleCategories(result);
     });
-    $(#newUser).click(() => {
-      console.log('New user click! What I have to do?')
-    })
-    $(#newCategory).click(() => {
-      console.log('Ho! I need a new category PLZ');
-    })
-    $()
+
   });
 });
 

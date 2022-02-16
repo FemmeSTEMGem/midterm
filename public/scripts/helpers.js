@@ -1,26 +1,3 @@
-// generateRandomString is function for create a new or check a existing email .
-
-const generateRandomString = () => {
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  let randomString = '';
-
-  while (randomString.length < 6) {
-    randomString += chars[Math.floor(Math.random() * chars.length)];
-  }
-  return randomString;
-};
-
-// email check
-
-const getUserByEmail = (email, database) => {
-  for (const user in database) {
-    if (database[user].email === email) {
-      return database[user];
-    }
-  }
-  return undefined;
-};
-
 const appendCategories = function(category) {
   const $singleListElement = $(`
   <div class="task">
@@ -55,4 +32,5 @@ const createFieldTable = function(element) {
     )
     }
 };
-module.exports = { urlsForUser, generateRandomString, getUserByEmail, appendCategories, appendMultipleCategories, createFieldTable };
+
+module.exports = { appendCategories, appendMultipleCategories, createFieldTable };
