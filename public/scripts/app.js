@@ -79,6 +79,11 @@ const apiURL4 = 'https://api.tvmaze.com/search/shows?q=cars';
 /* only execute this script when the document is ready */
 $(document).ready(function(){
 
+    /// we can use jquery for login with th event listener
+  $(#login).on(`submit`, (evt) => {
+    console.log('login work');
+  })
+
   /* function called when you click of the button */
   const array = ['#movies', '#restaurants', '#books', '#products' ];
   array.forEach(element => {
@@ -94,6 +99,7 @@ $(document).ready(function(){
     $(#newCategory).click(() => {
       console.log('Ho! I need a new category PLZ');
     })
+    $()
   });
 });
 
