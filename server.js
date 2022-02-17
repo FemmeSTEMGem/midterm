@@ -55,27 +55,40 @@ app.use("/api/list_items", listItemsRoutes(db));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 
-const getAllUsers = (callback) => {
-  db.query('SELECT * FROM users')
-  .then((results) => {
-    callback(results.rows)
-  // .catch((err) => console.log(err.message))
-  })
-}
+// const getAllUsers = (callback) => {
+//   db.query('SELECT * FROM users')
+//   .then((results) => {
+//     callback(results.rows)
+//   })
+// }
 
-app.get("/", (req, res) => {
-  getAllUsers((users) => {
-    const templateVars = {users}
-    res.render("index", templateVars);
-  })
-
-});
+// app.get("/", (req, res) => {
+//   getAllUsers((users) => {
+//     const templateVars = {users}
+//     res.render("index", templateVars);
+//   })
+// });
 
 // Users: <%=users[0].name %> - this is for the .ejs file
 
 
+// const getListItemsByCategory = (callback) => {
+//   db.query(`SELECT * FROM list_items WHERE category = to_watch`)
+//   .then((results) => {
+//     callback(results.rows)
+//   })
+// }
 
+// app.get("/categories", (req, res) => {
+//   getListItemsByCategory((list_items) => {
+//     const templateVars = {list_items}
+//     res.render("categories", templateVars)
+//   })
+// }) //watch/eat/read/buy
 
+app.get("/", (req, res) => {
+    res.render("index");
+});
 
 app.get("/login", (req, res) => {
   res.render("login")
