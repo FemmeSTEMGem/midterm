@@ -5,7 +5,7 @@
 const appendCategories = function(category) {
 
   const $singleListElement = $(`
-  <div class="task">
+  <div id="tasks">
     <div class="content">
       <p class="task-text">${category.name}</p>
     </div>
@@ -90,13 +90,14 @@ $(document).ready(function(){
       // to get data out using /fetch/jquery ajax
       $.get(apiURL).then((data) => {
         console.log('this is work 202020');
+          $('#tasks').empty();
 
         // we can loop here for the number of element for the presentation.
         // by here we chose what we need to fetch in show object and put it in result.
         // if i want to read directly in db i have to change the apiURL by the db path in json
 
         for (let i = 0; i < 10; i++){
-          console.log(data[i].show);
+          // console.log(data[i].show);
           let elem = {
             name: data[i].show.name,
             description: data[i].show.type,
@@ -107,16 +108,9 @@ $(document).ready(function(){
         }
             /* this function toggle the visibility of our "li" elements */
           $("li").toggle("slow");
-          $('#tasks').empty();
           appendMultipleCategories(result);
-
-
       });
 
-      /* this function toggle the visibility of our "li" elements */
-    //   $("li").toggle("slow");
-    // $('#tasks').empty();
-    // appendMultipleCategories(result);
     });
 
   });
