@@ -36,9 +36,12 @@ const createFieldTable = function(element) {
     )
     }
 };
-
+// from Shannon
 
 console.log("Do I work? yes");
+
+// Users: <%=users[0].name %>
+
 
 const result = [
   {
@@ -66,7 +69,7 @@ const result = [
       }
     }
 ];
-const apiURL1 = 'https://api.tvmaze.com/search/shows?q=cars';
+const apiURL1 = 'https://api.tvmaze.com/search/key/shows?q=cars';
 const apiURL2 = 'https://api.tvmaze.com/search/shows?q=cars';
 const apiURL3 = 'https://api.tvmaze.com/search/shows?q=cars';
 const apiURL4 = 'https://api.tvmaze.com/search/shows?q=cars';
