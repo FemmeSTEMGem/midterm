@@ -44,32 +44,8 @@ console.log("Do I work? yes");
 // Users: <%=users[0].name %>
 
 
-const result = [
-  {
-  description: "2018 film",
-  name: "Jurassic World I: Fallen Kingdom",
-  image: {
-    url: "https://commons.wikimedia.org/wiki/File:Jurassic_World_Fallen_Kingdom_Japan_Premiere_Red_Carpet_Chris_Pratt_%26_Bryce_Dallas_Howard_(29233763308).jpg",
-    contentUrl: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTb0DdcG6fVdyaEpR2ircvRww0gUzeVG5GYZW-hV4CmlMW4GDWn"
-  }
-  },
-  {
-    description: "2018 film",
-    name: "Jurassic World II: Fallen Kingdom",
-    image: {
-      url: "https://commons.wikimedia.org/wiki/File:Jurassic_World_Fallen_Kingdom_Japan_Premiere_Red_Carpet_Chris_Pratt_%26_Bryce_Dallas_Howard_(29233763308).jpg",
-      contentUrl: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTb0DdcG6fVdyaEpR2ircvRww0gUzeVG5GYZW-hV4CmlMW4GDWn"
-    }
-  },
-  {
-      description: "2018 film",
-      name: "Jurassic World III: Fallen Kingdom",
-      image: {
-        url: "https://commons.wikimedia.org/wiki/File:Jurassic_World_Fallen_Kingdom_Japan_Premiere_Red_Carpet_Chris_Pratt_%26_Bryce_Dallas_Howard_(29233763308).jpg",
-        contentUrl: "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTb0DdcG6fVdyaEpR2ircvRww0gUzeVG5GYZW-hV4CmlMW4GDWn"
-      }
-    }
-];
+const result = [];
+
 const apiURL1 = 'https://api.tvmaze.com/search/key/shows?q=cars';
 const apiURL2 = 'https://api.tvmaze.com/search/shows?q=cars';
 const apiURL3 = 'https://api.tvmaze.com/search/shows?q=cars';
@@ -98,16 +74,6 @@ const apiURL4 = 'https://api.tvmaze.com/search/shows?q=cars';
 
 
 // steps in building the app
-// get my api URL
-//////////////////////////////////
-// const apiURL = 'https://api.tvmaze.com/search/shows?q=cars';
-// // to get data out using /fetch/jquery ajax
-// $.get(apiURL).then((data) => {
-//   console.log('this is work 202020');
-//   console.log(data.show);
-// });
-////////////////////////////////
-// for test we need the mock data to avoid to paid the api request.
 
 // check! can we get data by ajax?
 
@@ -128,7 +94,7 @@ $(document).ready(function(){
         // we can loop here for the number of element for the presentation.
         // by here we chose what we need to fetch in show object and put it in result.
         // if i want to read directly in db i have to change the apiURL by the db path in json
-        
+
         for (let i = 0; i < 10; i++){
           console.log(data[i].show);
           let elem = {
@@ -155,25 +121,7 @@ $(document).ready(function(){
 
   });
 
-  $('#profile').click(function(){
-    console.log('profile page here');
-
-  });
-
 });
-
-
-
-// // document on ready function
-// $(() => {
-  // in case of we need to add the categorie in the url we do like this
-  // const searchURL = apiURL + item;
-  // then the $.get below should be on searchURL instant of apiURL
-// to get data out using /fetch/jquery ajax
-// GET https://kgsearch.googleapis.com/v1/entities:search
-  // appendMultipleCategories(result);
-
-  // $.get(apiURL).then((data) => {
 
 
 
@@ -195,77 +143,6 @@ $(document).ready(function(){
   // });
 
 
-  // login page - GET
-  // redirects to urls index page if already logged in
-
-  // app.get("/login", (req, res) => {
-  //   if (req.session.userID) {
-  //     res.redirect("/");
-  //     return;
-  //   }
-  //   const templateVars = { user: users[req.session.userID] };
-  //   res.render("/login", templateVars);
-  // });
-
-
-// });
-
-
-// we save data we get in our db
-//using this page instruction
-// https://www.c-sharpcorner.com/UploadFile/b926a6/data-insert-into-sql-database-using-jquery-ajax-method/
-
-// we  display the data in our web page
-
-
-// we play with the data in our db following of the need of our client
-
-// we use the edit and delete from our db
-
-// we build a dynamic web page
-
-// login page - GET
-// redirects to urls index page if already logged in
-
-// app.get("/login", (req, res) => {
-//   if (req.session.userID) {
-//     res.redirect("/urls");
-//     return;
-//   }
-//   const templateVars = { user: users[req.session.userID] };
-//   res.render("urls_login", templateVars);
-// });
-
-// // logging in - POST
-// // redirects to urls index page if credentials are valid
-
-// app.post("/login", (req, res) => {
-//   const user = getUserByEmail(req.body.email, users);
-
-//   if (user === undefined) {
-//     const errorMessage = 'Login credentials not valid. Make sure you are registered.';
-//     res.status(401).render('urls_error', {user: users[req.session.userID], errorMessage});
-//   };
-
-//   if (user && bcrypt.compareSync(req.body.password, user.password)) {
-//     req.session.userID = user.userID;
-//     res.redirect('/urls');
-//   } else {
-//     const errorMessage = 'Login credentials not valid. Please make sure you enter the correct username and password.';
-//     res.status(401).render('urls_error', {user: users[req.session.userID], errorMessage});
-//   }
-// });
-
-// // Logging out - POST
-// // clears cookies and redirects to urls index page
-
-// app.post("/logout", (req, res) => {
-//   res.clearCookie("session");
-//   res.clearCookie("session.sig");
-//   res.redirect("/urls");
-// });
-
-
 // const promise1 = app.get(url) for film
 // const promise2 = app.get(url) for restaurants
 // const promise3 = app.get(url) for books
@@ -284,3 +161,15 @@ $(document).ready(function(){
 //   .finally(rs => {
 //     pool.end();
 //   });
+
+// get my api URL
+//////////////////////////////////
+// const apiURL = 'https://api.tvmaze.com/search/shows?q=cars';
+// // to get data out using /fetch/jquery ajax
+// $.get(apiURL).then((data) => {
+//   console.log('this is work 202020');
+//   console.log(data.show);
+// });
+////////////////////////////////
+// for test we need the mock data to avoid to paid the api request.
+

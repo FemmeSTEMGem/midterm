@@ -50,18 +50,6 @@ app.use("/api/users", usersRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
-// // api
-// const apiURL1 = 'https://api.tvmaze.com/search/key/shows?q=movies';
-// const apiURL2 = 'https://api.tvmaze.com/search/shows?q=books';
-// const apiURL3 = 'https://api.tvmaze.com/search/shows?q=restaurants';
-// const apiURL4 = 'https://api.tvmaze.com/search/shows?q=';
-
-// const category = movies
-
-// app.get('apiURL4' + category) => {
-
-// }
-
 const getAllUsers = (callback) => {
   db.query('SELECT * FROM users')
   .then((results) => {
@@ -120,8 +108,6 @@ app.get("/edit-profile", (req, res) => {
   }
 
 })
-
-app.get()
 
 
 // this post must be implement with what we need to do after profile update
