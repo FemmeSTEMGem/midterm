@@ -167,3 +167,22 @@ $(document).ready(function(){
 ////////////////////////////////
 // for test we need the mock data to avoid to paid the api request.
 
+// how it should be, an api call in ajax.
+// var axios = require("axios").default;
+
+// var options = {
+//   method: 'GET',
+//   url: 'https://movie-database-imdb-alternative.p.rapidapi.com/',
+//   params: {s: 'Avengers Endgame', r: 'json', page: '1'},
+//   headers: {
+//     'x-rapidapi-host': 'movie-database-imdb-alternative.p.rapidapi.com',
+//     'x-rapidapi-key': '3e0dd86e83mshfd00507d24fcab4p1fbfa8jsn1ec1f1c8d228'
+//   }
+// };
+
+
+// axios.request(options).then(function (response) {
+// 	console.log(response.data);
+// }).catch(function (error) {
+// 	console.error(error);
+// });
