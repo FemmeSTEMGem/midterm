@@ -8,6 +8,11 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 
+const bodyParser = require("body-parser");
+const { text } = require("body-parser");
+const cookieSession = require("cookie-session");
+app.use(cookieSession({ name: "session", secret: "grey-rose-juggling-volcanoes" }));
+
 // PG database client/connection setup
 const { Pool } = require("pg");
 const dbParams = require("./lib/db.js");
@@ -37,6 +42,7 @@ app.use(express.static("public"));
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
 const widgetsRoutes = require("./routes/widgets");
+const { get } = require("lodash");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -44,49 +50,101 @@ app.use("/api/users", usersRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
+const getAllUsers = (callback) => {
+  db.query('SELECT * FROM users')
+  .then((results) => {
+    callback(results.rows)
+  })
+}
+
+app.get("/", (req, res) => {
+  getAllUsers((users) => {
+    const templateVars = {users}
+    res.render("index", templateVars);
+  })
+});
+
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
+
+// app.get("/", (req, res) => {
+//   res.render("index");
+// });
+
+
+// // form action as to be = /login method = POST
+// // all info from the form will be in req.body
+// // ***
+// app.get("/login", (req, res) => {
+//   if (req.session.userID) {
+//     res.redirect("/");
+//     return;
+//   }
+//   const templateVars = { user: users[req.session.userID] };
+//   res.render("/login", templateVars);
+// });
+
+
+// edit profile is good plz dont touch
+app.get("/edit-profile", (req, res) => {
+  let templateVars = {user_id: '123'};
+  // promise
+  // const query = `SELECT * FROM users WHERE users.id = 1`;
+  const query = `SELECT * FROM users WHERE users.id = $1`;
+  console.log(`userId: ${req.session.user_id}`);
+  // check
+
+  if (!req.session.user_id) {
+    res.render('login');
+  } else {
+  db
+  .query(query, [req.session.user_id] )
+  .then(data => {
+    templateVars = data.rows[0];
+    res.render('profile', templateVars);
+  })
+  .catch(e => console.error(e.stack))
+  }
+
+})
+
+
+// this post must be implement with what we need to do after profile update
+
+// app.post("/profile", (req, res) => {
+//   console.log('profile changed');
+//   console.log(body);
+// })
+
 
 app.get("/", (req, res) => {
   res.render("index");
 });
 
-// form action as to be = /login method = POST
-// all info from the form will be in req.body
-// ***
 app.get("/login", (req, res) => {
-  if (req.session.userID) {
-    res.redirect("/");
-    return;
-  }
-  const templateVars = { user: users[req.session.userID] };
-  res.render("/login", templateVars);
+res.render("login")
 });
-// edit profile is good plz dont touch
-app.get("/edit-profile", (req, res) => {
-  let templateVars = {user_id: '123'};
-  // promise
-  const query = `SELECT * FROM users WHERE users.id = 1`;
-  // const query = `SELECT * FROM users WHERE users.id = $1`;
-  console.log(`userId: ${req.session}`);
-db
-.query(query)
-// .query(query, [req.session.userID] )
-.then(data => {
-  templateVars = data.rows[0];
-  res.render('profile', templateVars);
-})
-.catch(e => console.error(e.stack))
 
+//LOGIN USER
+app.post("/login", (req, res) => {
+req.session.user_id = 1
+return res.redirect("/")
 })
-// this post must be implement with what we need to do after profile update
 
-app.post("/profile", (req, res) => {
-  console.log('profile changed');
-  console.log(body);
+app.get("/login/:apiURL", (req, res) => {
+  res.render()
 })
+//LOGOUT USER
+app.post("/logout", (req, res) => {
+req.session = null;
+
+return res.redirect("/");
+});
+
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
+
+
