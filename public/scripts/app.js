@@ -3,6 +3,7 @@
 // functions
 
 const appendCategories = function(category) {
+
   const $singleListElement = $(`
   <div class="task">
     <div class="content">
@@ -10,8 +11,8 @@ const appendCategories = function(category) {
     </div>
   </div>
   <div class="actions">
-    <button class="edit">Edit</button>
-    <button class="delete">Delete</button>
+    <button type="submit" class="edit">Edit</button>
+    <button type="submit" class="delete">Delete</button>
   </div>
   `);
     return $singleListElement;
@@ -20,22 +21,22 @@ const appendCategories = function(category) {
 const appendMultipleCategories = function(result) {
   for (let element of result) {
     const $list = appendCategories(element);
-    $('#tasks').prepend($list); // to add it to the page so we can make sure
+    $('#tasks').append($list); // to add it to the page so we can make sure
     // createFieldTable(element);
   }
 }
 
 // create a row in db
-const createFieldTable = function(element) {
-  for (let cat in element) {
-    console.log(`cat: ${element[cat]}`);
-    let user_id = 4;
-    Pool.query(`
-      INSERT INTO widgets (entry_text, category, user_id)
-      values ($1, $2, $3), [${cat.name}, ${cat.category}, ${user_id}]`
-    )
-    }
-};
+// const createFieldTable = function(element) {
+//   for (let cat in element) {
+//     console.log(`cat: ${element[cat]}`);
+//     let user_id = 4;
+//     Pool.query(`
+//       INSERT INTO widgets (entry_text, category, user_id)
+//       values ($1, $2, $3), [${cat.name}, ${cat.category}, ${user_id}]`
+//     )
+//     }
+// };
 // from Shannon
 
 console.log("Do I work? yes");
@@ -100,8 +101,8 @@ const apiURL4 = 'https://api.tvmaze.com/search/shows?q=cars';
 // get my api URL
 //////////////////////////////////
 // const apiURL = 'https://api.tvmaze.com/search/shows?q=cars';
-// to get data out using /fetch/jquery ajax
-// $.get(apiURL1).then((data) => {
+// // to get data out using /fetch/jquery ajax
+// $.get(apiURL).then((data) => {
 //   console.log('this is work 202020');
 //   console.log(data.show);
 // });
@@ -115,18 +116,47 @@ $(document).ready(function(){
 
   /* function called when you click of the button */
   const array = ['#movies', '#restaurants', '#books', '#products' ];
+
   array.forEach(element => {
     $(element).click(function(){
+
+      const apiURL = 'https://api.tvmaze.com/search/shows?q=cars';
+      // to get data out using /fetch/jquery ajax
+      $.get(apiURL).then((data) => {
+        console.log('this is work 202020');
+
+        // we can loop here for the number of element for the presentation.
+        // by here we chose what we need to fetch in show object and put it in result.
+        // if i want to read directly in db i have to change the apiURL by the db path in json
+        
+        for (let i = 0; i < 10; i++){
+          console.log(data[i].show);
+          let elem = {
+            name: data[i].show.name,
+            description: data[i].show.type,
+            image: data[i].show.language
+          };
+          result.push(elem);
+
+        }
+            /* this function toggle the visibility of our "li" elements */
+          $("li").toggle("slow");
+          $('#tasks').empty();
+          appendMultipleCategories(result);
+
+
+      });
+
       /* this function toggle the visibility of our "li" elements */
-      $("li").toggle("slow");
-      appendMultipleCategories(result);
+    //   $("li").toggle("slow");
+    // $('#tasks').empty();
+    // appendMultipleCategories(result);
     });
 
   });
 
   $('#profile').click(function(){
     console.log('profile page here');
-
 
   });
 

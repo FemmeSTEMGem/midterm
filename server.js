@@ -8,6 +8,11 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 
+const bodyParser = require("body-parser");
+const { text } = require("body-parser");
+const cookieSession = require("cookie-session");
+app.use(cookieSession({ name: "session", secret: "grey-rose-juggling-volcanoes" }));
+
 // PG database client/connection setup
 const { Pool } = require("pg");
 const dbParams = require("./lib/db.js");
@@ -99,17 +104,24 @@ app.get("/edit-profile", (req, res) => {
   // promise
   // const query = `SELECT * FROM users WHERE users.id = 1`;
   const query = `SELECT * FROM users WHERE users.id = $1`;
-  console.log(`userId: ${req.session}`);
-db
-  .query(query)
-  .query(query, [req.session.userID] )
+  console.log(`userId: ${req.session.user_id}`);
+  // check
+
+  if (!req.session.user_id) {
+    res.render('login');
+  } else {
+  db
+  .query(query, [req.session.user_id] )
   .then(data => {
     templateVars = data.rows[0];
     res.render('profile', templateVars);
   })
   .catch(e => console.error(e.stack))
+  }
 
 })
+
+app.get()
 
 
 // this post must be implement with what we need to do after profile update
@@ -130,17 +142,19 @@ res.render("login")
 
 //LOGIN USER
 app.post("/login", (req, res) => {
-req.session.userID = 1
+req.session.user_id = 1
 return res.redirect("/")
 })
 
+app.get("/login/:apiURL", (req, res) => {
+  res.render()
+})
 //LOGOUT USER
 app.post("/logout", (req, res) => {
 req.session = null;
 
 return res.redirect("/");
 });
-
 
 
 app.listen(PORT, () => {
