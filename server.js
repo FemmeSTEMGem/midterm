@@ -161,17 +161,29 @@ app.listen(PORT, () => {
 });
 
 
-
+const urlEncode = function(text) {
+  let separated = text.trim().split(" ")
+    for (let i = 0; i < separated.length - 1; i++) {
+      separated[i] += "+";
+    };
+  return separated.join('');
+};
 
 
 //TASK ENTRY
 
 app.post("/", (req, res) => {
-  const entry = req.body.entry
+  const entry = urlEncode(req.body.entry)
   fetch(`https://kgsearch.googleapis.com/v1/entities:search?query=${entry}&key=${process.env.API_KEY}&limit=1&indent=True`)
     .then(res => res.json())
-    .then(data => console.log(data.itemListElement[0].result.description))
+    .then(data => generateResult(data.itemListElement[0].result.description))
+
+  const generateResult = (data) => {
+    console.log(data)
+  }
 });
+
+
 
 // https://kgsearch.googleapis.com/v1/entities:search?query=taylor+swift&key=API_KEY&limit=1&indent=True
 
