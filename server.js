@@ -1,6 +1,10 @@
 // load .env data into process.env
 require("dotenv").config();
 
+//Fetch Requirement:
+const fetch = require('node-fetch')
+// import fetch from "node-fetch";
+
 // Web server config
 const PORT = process.env.PORT || 8080;
 const sassMiddleware = require("./lib/sass-middleware");
@@ -25,11 +29,11 @@ db.connect();
 //          client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan("dev"));
 
-const cookieSession = require('cookie-session');
-app.use(cookieSession({
-  name: 'session',
-  keys: ['key1', 'key2'],
-}));
+// const cookieSession = require('cookie-session');
+// app.use(cookieSession({
+//   name: 'session',
+//   keys: ['key1', 'key2'],
+// }));
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
@@ -48,12 +52,9 @@ app.use(express.static("public"));
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
-<<<<<<< HEAD
 const listItemsRoutes = require("./routes/list_items");
-=======
-const widgetsRoutes = require("./routes/widgets");
-const { get } = require("lodash");
->>>>>>> b0f470a2379a7724a1d1e294dead29002eae4acc
+// const widgetsRoutes = require("./routes/widgets");
+// const { get } = require("lodash");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -61,19 +62,21 @@ app.use("/api/users", usersRoutes(db));
 app.use("/api/list_items", listItemsRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
-const getAllUsers = (callback) => {
-  db.query('SELECT * FROM users')
-  .then((results) => {
-    callback(results.rows)
-  })
-}
 
-app.get("/", (req, res) => {
-  getAllUsers((users) => {
-    const templateVars = {users}
-    res.render("index", templateVars);
-  })
-});
+
+// const getAllUsers = (callback) => {
+//   db.query('SELECT * FROM users')
+//   .then((results) => {
+//     callback(results.rows)
+//   })
+// }
+
+// app.get("/", (req, res) => {
+//   getAllUsers((users) => {
+//     const templateVars = {users}
+//     res.render("index", templateVars);
+//   })
+// });
 
 // Home page
 // Warning: avoid creating more routes in this file!
@@ -134,24 +137,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-<<<<<<< HEAD
-  res.render("login")
-});
-
-//LOGIN USER
-app.post("/login", (req, res) => {
-  req.session.user_id = 1
-  return res.redirect("/")
-})
-
-//LOGOUT USER
-app.post("/logout", (req, res) => {
-  req.session = null;
-
-  return res.redirect("/");
-=======
 res.render("login")
->>>>>>> b0f470a2379a7724a1d1e294dead29002eae4acc
 });
 
 //LOGIN USER
@@ -170,9 +156,38 @@ req.session = null;
 return res.redirect("/");
 });
 
-
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
 
 
+
+
+
+//TASK ENTRY
+
+app.post("/", (req, res) => {
+  const entry = req.body.entry
+  fetch(`https://kgsearch.googleapis.com/v1/entities:search?query=${entry}&key=${process.env.API_KEY}&limit=1&indent=True`)
+    .then(res => res.json())
+    .then(data => console.log(data.itemListElement[0].result.description))
+});
+
+// https://kgsearch.googleapis.com/v1/entities:search?query=taylor+swift&key=API_KEY&limit=1&indent=True
+
+// POST request
+// Check if user is logged in - if not, error message
+// If user is logged in, push their query into the APIUrl (we'll need a function to replace any spaces
+  // with "+"
+// Then use the APIUrl to make an API request
+// Pull the information we need from the JSON object we receive
+// Compare that information against a set of keywords we give it to determine which category it should
+  // go into
+// Do INSERT INTO to push the information into our database (using $1, $2, etc. to keep our database safe)
+
+//fetch request takes two arguments, the first is the API URL, the second is optional - but you'll ONLY
+  //need to use this optional argument if you're making a POST request
+
+//fetching the API will always succeed unless there's a network error:
+  //you can't use .catch to catch API errors
+  //instead, you have to catch it in the first .then as above

@@ -37,13 +37,14 @@
 
     </ul>
     <!-- New test code added for task button -->
-    <div class="content">
-      <!-- <input type="text" class="text" value="A new task" readonly> -->
+    <!-- <input type="text" class="text" value="A new task" readonly> -->
 
-      <input class="text" type="text" name="category" placeholder="Enter new category" style="width: 200px">
-
-    </div>
-    <input type="submit" id="new-task-submit" value="Add task" />
+    <form class="form-inline" action="/" method="POST">
+      <div class="content">
+        <input class="form-control" type="text" name="entry" placeholder="Enter new task" style="width: 200px">
+      </div>
+      <input type="submit" id="new-task-submit" value="Add task" />
+    </form>
   </nav>
 
 
@@ -53,7 +54,7 @@
     <main>
       <section class="task-list">
         <h2>Task: <%= %>
-        </h2> 
+        </h2>
 
         <br>
 
