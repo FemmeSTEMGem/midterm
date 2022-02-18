@@ -6,13 +6,12 @@ const appendCategories = function(category) {
 
   const $singleListElement = $(`
   <div id="tasks">
+
     <div class="content">
-      <p class="task-text">${category.name}</p>
+      <p class="task-text" style="width: 200px;"><b>${category}</b></p>
+      <button type="submit" class="btn task-edit btn-outline-primary">Edit</button>
+      <button type="submit" class="btn task-delete btn-outline-danger">Delete</button>
     </div>
-  </div>
-  <div class="actions">
-    <button type="submit" class="edit">Edit</button>
-    <button type="submit" class="delete">Delete</button>
   </div>
   `);
     return $singleListElement;
@@ -26,51 +25,11 @@ const appendMultipleCategories = function(result) {
   }
 }
 
-// create a row in db
-// const createFieldTable = function(element) {
-//   for (let cat in element) {
-//     console.log(`cat: ${element[cat]}`);
-//     let user_id = 4;
-//     Pool.query(`
-//       INSERT INTO widgets (entry_text, category, user_id)
-//       values ($1, $2, $3), [${cat.name}, ${cat.category}, ${user_id}]`
-//     )
-//     }
-// };
-// from Shannon
 
 console.log("Do I work? yes");
 
 // Users: <%=users[0].name %>
-
-
 const result = [];
-
-const apiURL1 = 'https://api.tvmaze.com/search/key/shows?q=cars';
-const apiURL2 = 'https://api.tvmaze.com/search/shows?q=cars';
-const apiURL3 = 'https://api.tvmaze.com/search/shows?q=cars';
-const apiURL4 = 'https://api.tvmaze.com/search/shows?q=cars';
-
- // login page - GET
- // redirects to urls index page if already logged in
-
-//  $.get(apiURL1)
-//  .then((data) => {
-//    console.log('this is work 202020');
-//    console.log(data[0].show.image.medium);
-//  })
-//  .catch(err => {
-//        console.log(err.message);
-//      });
-
-  // app.get("/login", (req, res) => {
-  //   if (req.session.userID) {
-  //     res.redirect("/");
-  //     return;
-  //   }
-  //   const templateVars = { user: users[req.session.userID] };
-  //   res.render("/login", templateVars);
-  // });
 
 
 // steps in building the app
@@ -82,33 +41,46 @@ $(document).ready(function(){
 
   /* function called when you click of the button */
   const array = ['#movies', '#restaurants', '#books', '#products' ];
+  const category_name_map = {
+    '#movies': 'to_watch',
+    '#restaurants': 'to_eat',
+    '#books': 'to_read',
+    '#products': 'to_buy'
+  };
 
   array.forEach(element => {
+    // element can only be #movies or #restaurants...
     $(element).click(function(){
 
-      const apiURL = 'https://api.tvmaze.com/search/shows?q=cars';
+      const apiURL = '/list_items';
       // to get data out using /fetch/jquery ajax
-      $.get(apiURL).then((data) => {
+      $.get(apiURL).then((apiResponse) => {
         console.log('this is work 202020');
+        console.log(apiResponse);
           $('#tasks').empty();
 
         // we can loop here for the number of element for the presentation.
         // by here we chose what we need to fetch in show object and put it in result.
         // if i want to read directly in db i have to change the apiURL by the db path in json
+        let category_names = [];
+        apiResponse.list_items.forEach(item => {
 
-        for (let i = 0; i < 10; i++){
-          // console.log(data[i].show);
-          let elem = {
-            name: data[i].show.name,
-            description: data[i].show.type,
-            image: data[i].show.language
-          };
-          result.push(elem);
+          // let elem = {
+          //   name: data[i].itemListElement.name,
+          //   description: data[i].itemListElement.type,
+          //   image: data[i].itemListElement.language
+          // };
+          if (item.category === category_name_map[element]) {
+            category_names.push(item.entry);
+            // item.category can only be
+            // to_watch, to_eat, to_read or to_buy
+          }
 
-        }
+        })
+
             /* this function toggle the visibility of our "li" elements */
           $("li").toggle("slow");
-          appendMultipleCategories(result);
+          appendMultipleCategories(category_names);
       });
 
     });
@@ -119,70 +91,3 @@ $(document).ready(function(){
 
 
 
-
-  // $('btn1 btn-primary').on(`submit`, (evt) => {
-  //   evt.preventDefault();
-  //   console.log('HELLO WORLD!');
-  //   $('btn1 btn-primary').empty();
-  //   // get the text from the input field
-  //   // append it to the my API URL
-  //   // get the new data
-  //   // appended to the website
-  //   // write the data to the db
-  // })
-
-  /// we can use jquery for login with th event listener
-  // $(#login).on(`submit`, (evt) => {
-  //   console.log('login work');
-  // });
-
-
-// const promise1 = app.get(url) for film
-// const promise2 = app.get(url) for restaurants
-// const promise3 = app.get(url) for books
-// const promise4 = app.get(url) for products
-
-// promise.all([promise1, promise2, promise3, promise4])
-//    .then(all => {
-//     console.log(`all 1; ${all[0].data}`);
-//     console.log(`all 2; ${all[0].data}`);
-//     console.log(`all 3; ${all[0].data}`);
-//     console.log(`all 4; ${all[0].data}`);
-// })
-//   .catch(err => {
-//     console.log(err.message);
-//   })
-//   .finally(rs => {
-//     pool.end();
-//   });
-
-// get my api URL
-//////////////////////////////////
-// const apiURL = 'https://api.tvmaze.com/search/shows?q=cars';
-// // to get data out using /fetch/jquery ajax
-// $.get(apiURL).then((data) => {
-//   console.log('this is work 202020');
-//   console.log(data.show);
-// });
-////////////////////////////////
-// for test we need the mock data to avoid to paid the api request.
-
-// how it should be, an api call in ajax.
-// var axios = require("axios").default;
-
-// var options = {
-//   method: 'GET',
-//   url: 'https://movie-database-imdb-alternative.p.rapidapi.com/',
-//   params: {s: 'Avengers Endgame', r: 'json', page: '1'},
-//   headers: {
-//     'x-rapidapi-host': 'movie-database-imdb-alternative.p.rapidapi.com',
-//     'x-rapidapi-key': '3e0dd86e83mshfd00507d24fcab4p1fbfa8jsn1ec1f1c8d228'
-//   }
-// };
-
-
-// axios.request(options).then(function (response) {
-// 	console.log(response.data);
-// }).catch(function (error) {
-// 	console.error(error);
-// });

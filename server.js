@@ -78,28 +78,6 @@ app.use("/api/list_items", listItemsRoutes(db));
 //   })
 // });
 
-// Home page
-// Warning: avoid creating more routes in this file!
-// Separate them into separate routes files (see above).
-
-// app.get("/", (req, res) => {
-//   res.render("index");
-// });
-
-
-// // form action as to be = /login method = POST
-// // all info from the form will be in req.body
-// // ***
-// app.get("/login", (req, res) => {
-//   if (req.session.userID) {
-//     res.redirect("/");
-//     return;
-//   }
-//   const templateVars = { user: users[req.session.userID] };
-//   res.render("/login", templateVars);
-// });
-
-
 // edit profile is good plz dont touch
 app.get("/edit-profile", (req, res) => {
   let templateVars = {user_id: '123'};
@@ -123,13 +101,37 @@ app.get("/edit-profile", (req, res) => {
 
 })
 
+// INSERT the data in db
 
-// this post must be implement with what we need to do after profile update
+app.post('/list_items', (req, res) => {
+  console.log('POST request listener');
+  console.log(req.body);
+  const sqlQuery = `INSERT INTO  list_items(entry, category) VALUES($1, $2) RETURNING * `;
+  const sqlValues = [req.body.entry, req.body.category];
+  db.query(sqlQuery, sqlValues)
+    .then(result => {
+      console.log('DB result: ', result);
+      res.json({list_items: result.rows});
+    })
+  .catch(e => console.error(e.stack))
 
-// app.post("/profile", (req, res) => {
-//   console.log('profile changed');
-//   console.log(body);
-// })
+})
+// GET for writing db data
+
+app.get("/list_items", (req, res) => {
+  console.log('this is the get api');
+
+  const sqlQuery = `SELECT * FROM list_items`;
+  db
+  .query(sqlQuery )
+  .then(result => {
+    console.log(result);
+    // templateVars = da.rows[0];
+    res.json({list_items: result.rows});
+  // res.render('profile', templateVars);
+  })
+  .catch(e => console.error(e.stack))
+})
 
 
 app.get("/", (req, res) => {

@@ -1,6 +1,6 @@
 body {
   max-width: 100%;
-  margin: auto;
+  margin: 1em;
   min-height: 100vh;
   width: 100%;
 
@@ -19,9 +19,15 @@ body {
 .navbuttons {
   margin-top: 35px;
 }
- .content {
+.content {
    display: flex;
-   justify-content: normal;
+   justify-content: space-between;
+}
 
- }
+.task-edit {
+   margin: 1em;
+}
 
+.task-delete {
+  margin: 1em;
+}

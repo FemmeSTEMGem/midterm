@@ -29,25 +29,30 @@
     <ul>
 
       <!-- button here -->
-      <button id="movies">Film series to watch</button>
+      <button id="movies">Film or series</button>
       <!-- <br> -->
-      <button id="restaurants">Restaurants, cafes, etc. (To eat)</button>
-      <button id="books">Books (To read)</button>
-      <button id="products">Products (To buy)</button>
+      <button id="restaurants">Restaurants or cafes</button>
+      <button id="books">My books list </button>
+      <button id="products">Products to buy</button>
 
     </ul>
     <!-- New test code added for task button -->
     <!-- <input type="text" class="text" value="A new task" readonly> -->
 
-    <form class="form-inline" action="/" method="POST">
+    <!-- <form class="form-inline" action="/" method="POST">
       <div class="content">
         <input class="form-control" type="text" name="entry" placeholder="Enter new task" style="width: 200px">
       </div>
       <input type="submit" id="new-task-submit" value="Add task" />
-    </form>
+    </form> -->
+    <div class="content">
+      <form action="/list_items" method="POST">
+        <!-- <input class="text" type="text" name="category" placeholder="Enter new task" style="width: 200px"> -->
+        <input type="text" class="text" name="entry" placeholder="your title" style="width: 200px">
+        <input type="submit" id="new-task-submit" value="Add task" />
+      </form>
+    </div>
   </nav>
-
-
   </header>
   <br>
   <div>
@@ -55,24 +60,17 @@
       <section class="task-list">
         <h2>Task: <%= %>
         </h2>
-
         <br>
 
         <div id="tasks">
-
           <div class="task">
-
             <link rel="stylesheet" href="/styles/main.css" />
             </head>
-
-
           </div>
         </div>
       </section>
     </main>
   </div>
-
-  <!-- <script src="fill out later"></script> -->
 </body>
 
 </html>
