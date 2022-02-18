@@ -29,8 +29,6 @@ const appendMultipleCategories = function(result) {
 console.log("Do I work? yes");
 
 // Users: <%=users[0].name %>
-
-
 const result = [];
 
 
@@ -93,70 +91,3 @@ $(document).ready(function(){
 
 
 
-
-  // $('btn1 btn-primary').on(`submit`, (evt) => {
-  //   evt.preventDefault();
-  //   console.log('HELLO WORLD!');
-  //   $('btn1 btn-primary').empty();
-  //   // get the text from the input field
-  //   // append it to the my API URL
-  //   // get the new data
-  //   // appended to the website
-  //   // write the data to the db
-  // })
-
-  /// we can use jquery for login with th event listener
-  // $(#login).on(`submit`, (evt) => {
-  //   console.log('login work');
-  // });
-
-
-// const promise1 = app.get(url) for film
-// const promise2 = app.get(url) for restaurants
-// const promise3 = app.get(url) for books
-// const promise4 = app.get(url) for products
-
-// promise.all([promise1, promise2, promise3, promise4])
-//    .then(all => {
-//     console.log(`all 1; ${all[0].data}`);
-//     console.log(`all 2; ${all[0].data}`);
-//     console.log(`all 3; ${all[0].data}`);
-//     console.log(`all 4; ${all[0].data}`);
-// })
-//   .catch(err => {
-//     console.log(err.message);
-//   })
-//   .finally(rs => {
-//     pool.end();
-//   });
-
-// get my api URL
-//////////////////////////////////
-// const apiURL = 'https://api.tvmaze.com/search/shows?q=cars';
-// // to get data out using /fetch/jquery ajax
-// $.get(apiURL).then((data) => {
-//   console.log('this is work 202020');
-//   console.log(data.show);
-// });
-////////////////////////////////
-// for test we need the mock data to avoid to paid the api request.
-
-// how it should be, an api call in ajax.
-// var axios = require("axios").default;
-
-// var options = {
-//   method: 'GET',
-//   url: 'https://movie-database-imdb-alternative.p.rapidapi.com/',
-//   params: {s: 'Avengers Endgame', r: 'json', page: '1'},
-//   headers: {
-//     'x-rapidapi-host': 'movie-database-imdb-alternative.p.rapidapi.com',
-//     'x-rapidapi-key': '3e0dd86e83mshfd00507d24fcab4p1fbfa8jsn1ec1f1c8d228'
-//   }
-// };
-
-
-// axios.request(options).then(function (response) {
-// 	console.log(response.data);
-// }).catch(function (error) {
-// 	console.error(error);
-// });

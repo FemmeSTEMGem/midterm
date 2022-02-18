@@ -64,28 +64,6 @@ app.get("/", (req, res) => {
   })
 });
 
-// Home page
-// Warning: avoid creating more routes in this file!
-// Separate them into separate routes files (see above).
-
-// app.get("/", (req, res) => {
-//   res.render("index");
-// });
-
-
-// // form action as to be = /login method = POST
-// // all info from the form will be in req.body
-// // ***
-// app.get("/login", (req, res) => {
-//   if (req.session.userID) {
-//     res.redirect("/");
-//     return;
-//   }
-//   const templateVars = { user: users[req.session.userID] };
-//   res.render("/login", templateVars);
-// });
-
-
 // edit profile is good plz dont touch
 app.get("/edit-profile", (req, res) => {
   let templateVars = {user_id: '123'};
@@ -109,6 +87,7 @@ app.get("/edit-profile", (req, res) => {
 
 })
 
+// INSERT the data in db
 
 app.post('/list_items', (req, res) => {
   console.log('POST request listener');
@@ -123,7 +102,7 @@ app.post('/list_items', (req, res) => {
   .catch(e => console.error(e.stack))
 
 })
-// GET for db data
+// GET for writing db data
 
 app.get("/list_items", (req, res) => {
   console.log('this is the get api');
@@ -139,13 +118,6 @@ app.get("/list_items", (req, res) => {
   })
   .catch(e => console.error(e.stack))
 })
-
-// this post must be implement with what we need to do after profile update
-
-// app.post("/profile", (req, res) => {
-//   console.log('profile changed');
-//   console.log(body);
-// })
 
 
 app.get("/", (req, res) => {
