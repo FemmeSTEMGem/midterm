@@ -66,15 +66,15 @@ button {
   display: block;
 
   /*since we are here, we can style it a little bit!*/
-  padding: 2vw;
-  font-size: 3vh;
-  background-color: #AFE0FF;
+  padding: 1vw;
+  font-size: 1.5vh;
   border: none;
 
   /*outline none removes the default blue border that appears anytime you click on the button*/
   outline: none;
 
   cursor: pointer;
+  display: inline-flex
 }
 
 
