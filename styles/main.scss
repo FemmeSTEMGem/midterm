@@ -19,9 +19,15 @@ body {
 .navbuttons {
   margin-top: 35px;
 }
- .content {
+.content {
    display: flex;
-   justify-content: normal;
+   justify-content: space-between;
+}
 
- }
+.task-edit {
+   margin: 1em;
+}
 
+.task-delete {
+  margin: 1em;
+}

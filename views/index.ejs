@@ -29,24 +29,23 @@
     <ul>
 
       <!-- button here -->
-      <button id="movies">Film series to watch</button>
+      <button id="movies">Film or series</button>
       <!-- <br> -->
-      <button id="restaurants">Restaurants, cafes, etc. (To eat)</button>
-      <button id="books">Books (To read)</button>
-      <button id="products">Products (To buy)</button>
+      <button id="restaurants">Restaurants or cafes</button>
+      <button id="books">My books list </button>
+      <button id="products">Products to buy</button>
 
     </ul>
     <!-- New test code added for task button -->
     <div class="content">
       <!-- <input type="text" class="text" value="A new task" readonly> -->
-
-      <input class="text" type="text" name="category" placeholder="Enter new category" style="width: 200px">
-
+      <form action="/list_items" method="POST">
+        <input class="text" type="text" name="category" placeholder="Enter new category" style="width: 200px">
+        <input type="text" class="text" name="entry" placeholder="your title" style="width: 200px">
+        <input type="submit" id="new-task-submit" value="Add task" />
+      </form>
     </div>
-    <input type="submit" id="new-task-submit" value="Add task" />
   </nav>
-
-
   </header>
   <br>
   <div>
@@ -54,24 +53,17 @@
       <section class="task-list">
         <h2>Task: <%= %>
         </h2>
-
         <br>
 
         <div id="tasks">
-
           <div class="task">
-
             <link rel="stylesheet" href="/styles/main.css" />
             </head>
-
-
           </div>
         </div>
       </section>
     </main>
   </div>
-
-  <!-- <script src="fill out later"></script> -->
 </body>
 
 </html>

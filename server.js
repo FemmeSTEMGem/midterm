@@ -110,6 +110,36 @@ app.get("/edit-profile", (req, res) => {
 })
 
 
+app.post('/list_items', (req, res) => {
+  console.log('POST request listener');
+  console.log(req.body);
+  const sqlQuery = `INSERT INTO  list_items(entry, category) VALUES($1, $2) RETURNING * `;
+  const sqlValues = [req.body.entry, req.body.category];
+  db.query(sqlQuery, sqlValues)
+    .then(result => {
+      console.log('DB result: ', result);
+      res.json({list_items: result.rows});
+    })
+  .catch(e => console.error(e.stack))
+
+})
+// GET for db data
+
+app.get("/list_items", (req, res) => {
+  console.log('this is the get api');
+
+  const sqlQuery = `SELECT * FROM list_items`;
+  db
+  .query(sqlQuery )
+  .then(result => {
+    console.log(result);
+    // templateVars = da.rows[0];
+    res.json({list_items: result.rows});
+  // res.render('profile', templateVars);
+  })
+  .catch(e => console.error(e.stack))
+})
+
 // this post must be implement with what we need to do after profile update
 
 // app.post("/profile", (req, res) => {

@@ -4,7 +4,9 @@ body {
   // // flex-direction: column;
   // flex-wrap: nowrap;
   // justify-content: last baseline;
-  width: 100%;
+  width: 90%;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 /* align-items: stretch; */
@@ -23,11 +25,16 @@ a:hover {
 ul {
   margin: 0;
   padding: 0;
-
+  background-color: #AFE0FF;
   /*this option by default dispose the elements in a row (flex-direction: row)*/
   display: flex;
+  justify-content: space-between;
+
 }
 
+ul:hover {
+ background-color: burlywood;
+}
 /*change the layout of the navigation bar for all the screens
 that have a width less or equal than 500px*/
 
@@ -37,6 +44,10 @@ that have a width less or equal than 500px*/
   ul {
     flex-direction: column;
   }
+
+  ul:hover {
+    background-color: azure;
+   }
 
   /* deletes margin on top or bottom of the a tag*/
   li {
@@ -50,11 +61,12 @@ that have a width less or equal than 500px*/
 }
 
 button {
-  display: block;
+  display: flex;
    cursor: pointer;
 
   /*this put the button on the left*/
   align-self: flex-start;
+  align-content: center;
 }
 
 button {
@@ -66,7 +78,7 @@ button {
   display: block;
 
   /*since we are here, we can style it a little bit!*/
-  padding: 2vw;
+  padding: 1vw;
   font-size: 3vh;
   background-color: #AFE0FF;
   border: none;
@@ -77,5 +89,8 @@ button {
   cursor: pointer;
 }
 
+button:hover {
+  background-color: wheat;
+}
 
 
