@@ -174,14 +174,45 @@ const urlEncode = function(text) {
 
 app.post("/", (req, res) => {
   const entry = urlEncode(req.body.entry)
+  let category = ''
   fetch(`https://kgsearch.googleapis.com/v1/entities:search?query=${entry}&key=${process.env.API_KEY}&limit=1&indent=True`)
     .then(res => res.json())
-    .then(data => generateResult(data.itemListElement[0].result.description))
-
-  const generateResult = (data) => {
-    console.log(data)
+    .then(data => assignCategory(data.itemListElement[0].result.description))
+    .catch((error) => {
+      console.error('Error:', error);
+    })
+  const assignCategory = (data) => {
+    if (!data) {
+      console.log("Caught the error at assignCategory")
+      category = "undefined"
+    } else {
+      console.log(data)
+      if (data.includes("film") || data.includes("movie") || data.includes("tv") || data.includes("television") || data.includes("show")) {
+        category = "to_watch";
+      } if (data.includes("book") || data.includes("Novel") || data.includes("comic")) {
+        category = "to_read";
+      } if (data.includes("Restaurant") || data.includes("Cafe") || data.includes("Lounge") || data.includes("Bistro")) {
+          category = "to_eat";
+      } if (data.includes("buy") || data.includes("product") || data.includes("sell")) {
+        category = "to_buy";
+      }
+    }
+    console.log(category)
   }
+
+  // pool.query(`INSERT INTO list_items (entry, category, user_id) VALUES ($1, ${category}, 1`, [entry])
+  //   .then(() => {
+  //     console.log('task has been added');
+  //     pool.end();
+  //   })
 });
+
+// .then(res => {
+//   if (!res.ok) {
+//     console.log("Not successful")
+//   } else {
+//     console.log("Success")
+//   }
 
 
 
