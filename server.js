@@ -160,6 +160,8 @@ app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
 
+//TASK ENTRY
+
 
 const urlEncode = function(text) {
   let separated = text.trim().split(" ")
@@ -169,9 +171,6 @@ const urlEncode = function(text) {
   return separated.join('');
 };
 
-
-//TASK ENTRY
-
 app.post("/", (req, res) => {
   const entry = urlEncode(req.body.entry)
   let category = ''
@@ -179,11 +178,12 @@ app.post("/", (req, res) => {
     .then(res => res.json())
     .then(data => assignCategory(data.itemListElement[0].result.description))
     .catch((error) => {
-      console.error('Error:', error);
+      console.error('ERROR AT .CATCH:', error);
     })
+
   const assignCategory = (data) => {
     if (!data) {
-      console.log("Caught the error at assignCategory")
+      console.log("CAUGHT THE ERROR AT ASSIGN CATEGORY")
       category = "undefined"
     } else {
       console.log(data)
@@ -197,23 +197,22 @@ app.post("/", (req, res) => {
         category = "to_buy";
       }
     }
-    console.log(category)
+    console.log("CATEGORY: ", category)
   }
 
-  // pool.query(`INSERT INTO list_items (entry, category, user_id) VALUES ($1, ${category}, 1`, [entry])
-  //   .then(() => {
-  //     console.log('task has been added');
-  //     pool.end();
-  //   })
+  db.query(`INSERT INTO list_items(entry, category, user_id) VALUES('${entry}', '${category}', 1);`)
+    .then(() => {
+      console.log('TASK HAS BEEN ADDED');
+    })
+
+  db.query(`SELECT * FROM list_items WHERE category = 'to_read';`)
+    .then((results) => {
+      console.log(results.rows)
+    })
+
+    db.end();
+
 });
-
-// .then(res => {
-//   if (!res.ok) {
-//     console.log("Not successful")
-//   } else {
-//     console.log("Success")
-//   }
-
 
 
 // https://kgsearch.googleapis.com/v1/entities:search?query=taylor+swift&key=API_KEY&limit=1&indent=True
