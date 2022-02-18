@@ -202,15 +202,13 @@ app.post("/", (req, res) => {
 
   db.query(`INSERT INTO list_items(entry, category, user_id) VALUES('${entry}', '${category}', 1);`)
     .then(() => {
-      console.log('TASK HAS BEEN ADDED');
+      // console.log('TASK HAS BEEN ADDED');
     })
 
   db.query(`SELECT * FROM list_items WHERE category = 'to_read';`)
     .then((results) => {
       console.log(results.rows)
     })
-
-    db.end();
 
 });
 

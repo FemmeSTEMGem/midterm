@@ -3,25 +3,27 @@ body {
   margin: auto;
   min-height: 100vh;
   width: 100%;
-
   background:
-  #def3e5;
+  #DEF3E5;
   color: #366859;
 }
-
 .topnav {
-  background: #ece9d5;
+  background: #ECE9D5;
   width: 100%;
   display: flex;
   justify-content: space-between;
 }
-
 .navbuttons {
   margin-top: 35px;
 }
- .content {
-   display: flex;
-   justify-content: normal;
-
- }
-
+//center box for submit task
+// input {
+//   margin: auto;
+// }
+//added style to submit task but it has added effects on other styles
+// .content {
+//   margin: auto;
+//   width: 40%;
+//   border: 3px solid #73AD21;
+//   padding: 10px;
+//  }
